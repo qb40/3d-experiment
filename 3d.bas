@@ -1,3 +1,4 @@
+'3d rotating zig-zag object
 '3d Formula for Coordinate Axes
 'x2=-z*sin@+x*cos@
 'y2=-z*cos@*sin#-x*sin@*sin#-y*cos#
