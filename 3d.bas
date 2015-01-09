@@ -1,3 +1,4 @@
+'3d rotating cube
 '3d Formula for Coordinate Axes
 'x2=-z*sin@+x*cos@
 'y2=-z*cos@*sin#-x*sin@*sin#-y*cos#+p
@@ -35,6 +36,7 @@ FOR i% = 0 TO 359
 sine(i%) = SIN((CSNG(i%) / 180) * 3.14)
 cosine(i%) = COS((CSNG(i%) / 180) * 3.14)
 NEXT
+
 SCREEN 9, , 1, 0
 TYPE objects
 x AS SINGLE
@@ -43,12 +45,13 @@ z AS SINGLE
 clr AS INTEGER
 END TYPE
 DIM obj(18) AS objects
+
 FOR i% = 0 TO UBOUND(obj)
 RANDOMIZE TIMER
 READ obj(i%).x, obj(i%).y, obj(i%).z
 obj(i%).clr = i% MOD 256
 NEXT
-k$ = INPUT$(1)
+
 xcentre = 250
 ycentre = 150
 zcentre = 256
