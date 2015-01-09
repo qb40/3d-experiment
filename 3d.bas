@@ -6,26 +6,33 @@
 'x2=d*cos@
 'y2=d*sin@
 'Both give exactly same result
+'Vic Luce = 6.43
+'Mine =6.27(Mine doesnt work)(I am a fool)
 '@ = theta = anti-clockwise angle(+ve angle)
-'Vic Luce = 2.80
-'Mine =1.64
+DIM sine(359), cosine(359)
+FOR i% = 0 TO 359
+sine(i%) = SIN((CSNG(i%) / 180) * 3.14)
+cosine(i%) = COS((CSNG(i%) / 180) * 3.14)
+NEXT
 SCREEN 13
+
 k$ = INPUT$(1)
-x = 100
-y = 0
+x = 50
+y = 100
 xcentre = 150
 ycentre = 100
 a = TIMER
-FOR i = 0 TO 6.28 STEP .00001
-PSET (xcentre + x * COS(i) + y * SIN(i), ycentre + y * COS(i) - x * SIN(i)), 1
+t = 360 / (6280000)
+FOR i = 0 TO 359 STEP t
+PSET (xcentre + x * cosine(i) + y * sine(i), ycentre + y * cosine(i) - x * sine(i)), 1
 NEXT
 PRINT "Vic Luce="; TIMER - a
 k$ = INPUT$(1)
 a = TIMER
 'd = SQR(x * x + y * y)
-FOR i = 0 TO 6.28 STEP .00001
+FOR i = 0 TO 359 STEP t
 d = SQR(x * x + y * y)
-PSET (xcentre + d * COS(i), ycentre - d * SIN(i)), 2
+PSET (xcentre + d * cosine(i), ycentre - d * sine(i)), 2
 NEXT
 PRINT "Mine="; TIMER - a
 
