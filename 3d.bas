@@ -1,54 +1,97 @@
-'Vic Luce 3D formula
-'x2=-x*sin@+y*cos@
-'y2=-x*cos@*sin#-y*sin@*sin#-z*cos#  +p
-'z2=-x*cos@*cos#-y*sin@*cos#+z*sin#
+'3d Formula for Coordinate Axes
+'x2=-z*sin@+x*cos@
+'y2=-z*cos@*sin#-x*sin@*sin#-y*cos#
+'z2=-z*cos@*cos#-x*sin@*cos#+y*sin#
 'x3=256*(x2/(z2+zcenter))+xcenter
 'y3=256*(y2/(z2+zcenter))+ycenter
+'3d Formula for Computer Axes
+'x2=z*sin@+x*cos@
+'y2=z*cos@*sin#-x*sin@*sin#+y*cos#
+'z2=z*cos@*cos#-x*sin@*cos#-y*sin#
+'x3=256*(x2/(z2+zcenter))+xcenter
+'y3=256*(y2/(z2+zcenter))+ycenter
+'@ = theta = Left-Right cockscrew up       (cockscrew=clockwise turn)
+'# = phi   = Up-Down    cockscrew right
+'Coordinate Axes
+'   ^y
+'   |
+'   |
+'   |
+'   ----->x
+' /
+'z
+'Computer Axes
+'----->x
+'|\
+'|  \z
+'|
+'y
+
+
+'Sampling Computer Axes ...
+'Press a key
 DIM sine(359), cosine(359)
 FOR i% = 0 TO 359
 sine(i%) = SIN((CSNG(i%) / 180) * 3.14)
 cosine(i%) = COS((CSNG(i%) / 180) * 3.14)
 NEXT
-SCREEN 13
+SCREEN 9, , 1, 0
 TYPE objects
 x AS SINGLE
 y AS SINGLE
 z AS SINGLE
 clr AS INTEGER
 END TYPE
-k$ = INPUT$(1)
-DIM obj(3) AS objects
+DIM obj(30) AS objects
 FOR i% = 0 TO UBOUND(obj)
-READ obj(i%).x, obj(i%).y, obj(i%).z
+RANDOMIZE TIMER
+obj(i%).x = RND * 100
+obj(i%).y = RND * 100
+obj(i%).z = RND * 100
 obj(i%).clr = i% MOD 256
 NEXT
-xcentre = 150
-ycentre = 100
+k$ = INPUT$(1)
+xcentre = 250
+ycentre = 150
 zcentre = 256
 theta = 0
 phi = 0
-DIM x3(3), y3(3)
-
+DIM x3(UBOUND(obj)), y3(UBOUND(obj))
+i% = 0
 a = TIMER
-t = 360 / (62800)
-FOR i = 0 TO 359 STEP t
+t = .01
+DO
 FOR j% = 0 TO UBOUND(obj)
-x2 = -obj(j%).x * SIN(theta) + obj(j%).y * COS(theta)
-y2 = -obj(j%).x * COS(theta) * SIN(phi) - obj(j%).y * SIN(theta) * SIN(phi) - obj(j%).z * COS(phi)
-z2 = -obj(j%).x * COS(theta) * COS(phi) - obj(j%).y * SIN(theta) * COS(phi) + obj(j%).z * SIN(phi)
-x3(j%) = 1256 * (x2 / (z2 + zcentre)) + xcentre
-y3(j%) = 1256 * (y2 / (z2 + zcentre)) + ycentre
+x2 = obj(j%).z * SIN(theta) + obj(j%).x * COS(theta)
+y2 = obj(j%).z * COS(theta) * SIN(phi) - obj(j%).x * SIN(theta) * SIN(phi) + obj(j%).y * COS(phi)
+z2 = obj(j%).z * COS(theta) * COS(phi) - obj(j%).x * SIN(theta) * COS(phi) - obj(j%).y * SIN(phi)
+x3(j%) = 256 * (x2 / (z2 + zcentre)) + xcentre
+y3(j%) = 256 * (y2 / (z2 + zcentre)) + ycentre
 NEXT
-LINE (x3(0), y3(0))-(x3(1), y3(1)), 1
-LINE -(x3(2), y3(2)), 2
-LINE -(x3(3), y3(3)), 3
-LINE -(x3(0), y3(0)), 4
-phi = phi + .0001
-theta = theta + .0001
+k$ = INKEY$
+IF k$ = CHR$(27) THEN SYSTEM
+IF (k$ = "w") THEN i% = (i% + 1) MOD 2
+CLS
+SELECT CASE i%
+CASE 0
+FOR k% = 0 TO UBOUND(obj)
+LINE (xcentre, ycentre)-(x3(k%), y3(k%)), obj(k%).clr
 NEXT
+CASE 1
+LINE (xcentre, ycentre)-(xcentre, ycentre), 0
+FOR k% = 0 TO UBOUND(obj)
+LINE -(x3(k%), y3(k%)), obj(k%).clr
+NEXT
+CASE ELSE
+END SELECT
+PCOPY 1, 0
+theta = theta + .01
+phi = phi + .01
+LOOP
 PRINT "Vic Luce="; TIMER - a
+'zxy
+DATA 50,0,0
+DATA 0,50,0
+DATA 0,0,50
 DATA 0,0,0
-DATA 0,10,0
-DATA 10,10,0
-DATA 10,0,0
 
