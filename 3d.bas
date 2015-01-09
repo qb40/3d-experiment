@@ -1,3 +1,4 @@
+'3d rotating triangle
 '3d Formula for Coordinate Axes
 'x2=-z*sin@+x*cos@
 'y2=-z*cos@*sin#-x*sin@*sin#-y*cos#+p
@@ -48,7 +49,6 @@ RANDOMIZE TIMER
 READ obj(i%).x, obj(i%).y, obj(i%).z
 obj(i%).clr = i% MOD 256
 NEXT
-k$ = INPUT$(1)
 xcentre = 250
 ycentre = 150
 zcentre = 256
