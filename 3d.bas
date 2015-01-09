@@ -1,38 +1,54 @@
-'Vic Luce Rotation formula
-'x2=x*cos@+y*sin@
-'y2=y*cos@-x*sin@
-'My Rotation formula
-'d=sqr(x*x+y*y)
-'x2=d*cos@
-'y2=d*sin@
-'Both give exactly same result
-'Vic Luce = 6.43
-'Mine =6.27(Mine doesnt work)(I am a fool)
-'@ = theta = anti-clockwise angle(+ve angle)
+'Vic Luce 3D formula
+'x2=-x*sin@+y*cos@
+'y2=-x*cos@*sin#-y*sin@*sin#-z*cos#  +p
+'z2=-x*cos@*cos#-y*sin@*cos#+z*sin#
+'x3=256*(x2/(z2+zcenter))+xcenter
+'y3=256*(y2/(z2+zcenter))+ycenter
 DIM sine(359), cosine(359)
 FOR i% = 0 TO 359
 sine(i%) = SIN((CSNG(i%) / 180) * 3.14)
 cosine(i%) = COS((CSNG(i%) / 180) * 3.14)
 NEXT
 SCREEN 13
-
+TYPE objects
+x AS SINGLE
+y AS SINGLE
+z AS SINGLE
+clr AS INTEGER
+END TYPE
 k$ = INPUT$(1)
-x = 50
-y = 100
+DIM obj(3) AS objects
+FOR i% = 0 TO UBOUND(obj)
+READ obj(i%).x, obj(i%).y, obj(i%).z
+obj(i%).clr = i% MOD 256
+NEXT
 xcentre = 150
 ycentre = 100
+zcentre = 256
+theta = 0
+phi = 0
+DIM x3(3), y3(3)
+
 a = TIMER
-t = 360 / (6280000)
+t = 360 / (62800)
 FOR i = 0 TO 359 STEP t
-PSET (xcentre + x * cosine(i) + y * sine(i), ycentre + y * cosine(i) - x * sine(i)), 1
+FOR j% = 0 TO UBOUND(obj)
+x2 = -obj(j%).x * SIN(theta) + obj(j%).y * COS(theta)
+y2 = -obj(j%).x * COS(theta) * SIN(phi) - obj(j%).y * SIN(theta) * SIN(phi) - obj(j%).z * COS(phi)
+z2 = -obj(j%).x * COS(theta) * COS(phi) - obj(j%).y * SIN(theta) * COS(phi) + obj(j%).z * SIN(phi)
+x3(j%) = 1256 * (x2 / (z2 + zcentre)) + xcentre
+y3(j%) = 1256 * (y2 / (z2 + zcentre)) + ycentre
+NEXT
+LINE (x3(0), y3(0))-(x3(1), y3(1)), 1
+LINE -(x3(2), y3(2)), 2
+LINE -(x3(3), y3(3)), 3
+LINE -(x3(0), y3(0)), 4
+phi = phi + .0001
+theta = theta + .0001
 NEXT
 PRINT "Vic Luce="; TIMER - a
-k$ = INPUT$(1)
-a = TIMER
-'d = SQR(x * x + y * y)
-FOR i = 0 TO 359 STEP t
-d = SQR(x * x + y * y)
-PSET (xcentre + d * cosine(i), ycentre - d * sine(i)), 2
-NEXT
-PRINT "Mine="; TIMER - a
+DATA 0,0,0
+DATA 0,10,0
+DATA 10,10,0
+DATA 10,0,0
 
