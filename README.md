@@ -36,12 +36,12 @@ y = yf + ycentre
 ##demo
 
 <img src="/assets/img/0.png" width="70%"><br/>
-a
+Cuboid in default position (keeps rotating).
 <br/>
 <br/>
 
 
 <img src="/assets/img/1.png" width="70%"><br/>
-a
+Cuboid in moved position (translated, rotated).
 <br/>
 <br/>
