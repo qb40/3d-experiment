@@ -2,7 +2,7 @@
 
 **qb-3d-experiment** is an experiment with 3D formulae in QuckBASIC, DOS.
 The program demonstrates a cuboid which can be rotated and translated using
-mentioned keys. The 3d formulae used are:
+mentioned keys. The 3d formulae used are: 
 
 | Symbols | Meaning|
 |---------|--------|
