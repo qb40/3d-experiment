@@ -35,13 +35,13 @@ y = yf + ycentre
 
 ##demo
 
-<img src="/assets/img/0.png" width="70%"><br/>
+<img src="https://raw.githubusercontent.com/wolfram77/qb-3d-experiment/gh-pages/0/image/0.png" width="70%"><br/>
 Cuboid in default position (keeps rotating).
 <br/>
 <br/>
 
 
-<img src="/assets/img/1.png" width="70%"><br/>
+<img src="https://raw.githubusercontent.com/wolfram77/qb-3d-experiment/gh-pages/0/image/0.png" width="70%"><br/>
 Cuboid in moved position (translated, rotated).
 <br/>
 <br/>
