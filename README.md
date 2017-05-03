@@ -1,6 +1,6 @@
-# qb-3d-experiment
+# 3dexperiment
 
-**qb-3d-experiment** is an experiment with 3D formulae in QuckBASIC, DOS.
+**3dexperiment** is an experiment with 3D formulae in QuckBASIC, DOS.
 The program demonstrates a cuboid which can be rotated and translated using
 mentioned keys. The 3d formulae used are: 
 
@@ -36,13 +36,13 @@ y = yf + ycentre
 
 ## demo
 
-<img src="https://raw.githubusercontent.com/wolfram77/qb-3d-experiment/gh-pages/0/image/0.png" width="70%"><br/>
+<img src="https://raw.githubusercontent.com/wolfram77/dos-3dexperiment/gh-pages/0/image/0.png" width="70%"><br/>
 Cuboid in default position (keeps rotating).
 <br/>
 <br/>
 
 
-<img src="https://raw.githubusercontent.com/wolfram77/qb-3d-experiment/gh-pages/0/image/0.png" width="70%"><br/>
+<img src="https://raw.githubusercontent.com/wolfram77/dos-3dexperiment/gh-pages/0/image/0.png" width="70%"><br/>
 Cuboid in moved position (translated, rotated).
 <br/>
 <br/>
